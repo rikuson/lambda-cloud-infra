@@ -6,7 +6,7 @@
     body_format: json
     headers:
       Content-Type: "application/json"
-      Authorization: "Bearer {{ api_token }}"
+      Authorization: "Bearer {{ api_key }}"
     body:
       region_name: "{{ region_name }}"
       instance_type_name: "{{ instance_type }}"
@@ -22,7 +22,7 @@
     return_content: yes
     headers:
       Content-Type: "application/json"
-      Authorization: "Bearer {{ api_token }}"
+      Authorization: "Bearer {{ api_key }}"
   register: instance_details
   until: instance_details.json.data.status == 'active'
   retries: 10
