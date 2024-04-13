@@ -1,2 +1,3 @@
-# lambda-cloud-infra
-ansible-playbook to launch and terminate lambda cloud instance.
+# Ansible Collection - rikuson.lambda_cloud_infra
+
+Documentation for the collection.
