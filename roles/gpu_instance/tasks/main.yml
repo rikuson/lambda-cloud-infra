@@ -1,0 +1,36 @@
+---
+- name: Launch an instance
+  uri:
+    url: "{{ api_url }}/instance-operations/launch"
+    method: POST
+    body_format: json
+    headers:
+      Content-Type: "application/json"
+      Authorization: "Bearer {{ api_token }}"
+    body:
+      region_name: "{{ region_name }}"
+      instance_type_name: "{{ instance_type }}"
+      ssh_key_names: ["{{ ssh_key_name }}"]
+      file_system_names: ["{{ file_system_name }}"]
+      quantity: 1
+  register: instances
+
+- name: Describe the instance
+  uri:
+    url: "{{ api_url}}/instances/{{ instances.json.data.instance_ids[0] }}"
+    method: GET
+    return_content: yes
+    headers:
+      Content-Type: "application/json"
+      Authorization: "Bearer {{ api_token }}"
+  register: instance_details
+  until: instance_details.json.data.status == 'active'
+  retries: 10
+  delay: 30
+
+- name: Add to host
+  add_host:
+    name: "{{ instance_details.json.data.ip }}"
+    groups: "{{ host_groups }}"
+    ansible_host: "{{ instance_details.json.data.ip }}"
+    ansible_user: ubuntu

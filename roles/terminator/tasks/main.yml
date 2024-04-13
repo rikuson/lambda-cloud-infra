@@ -1,0 +1,30 @@
+---
+- name: Install jq
+  apt:
+    name: jq
+    state: latest
+  become: yes
+
+- name: Install at
+  apt:
+    name: at
+    state: latest
+  become: yes
+
+- name: Install shell script
+  template:
+    src: terminate.sh.j2
+    dest: /bin/terminate
+    mode: 0755
+  become: yes
+
+- name: Edit cron job
+  become: yes
+  cron:
+    name: Set up terminator
+    minute: "*"
+    job: "if [ -e {{ output_file }} ]; then terminate; fi 2>/dev/null"
+
+- name: Schedule force terminate
+  command: "at now + {{ max_running_time }} -f /bin/terminate"
+  become: yes
