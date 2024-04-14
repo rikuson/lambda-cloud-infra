@@ -25,7 +25,7 @@
 
 - name: Copy Supervisor configuration file
   template:
-    src: "{{ name }}.conf.j2"
+    src: supervisord.conf.j2
     dest: "/etc/supervisor/conf.d/{{ name }}.conf"
     owner: root
     group: root
