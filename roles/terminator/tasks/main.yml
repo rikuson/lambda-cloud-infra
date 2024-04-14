@@ -26,5 +26,8 @@
     job: "if [ -e {{ output_file }} ]; then terminate; fi 2>/dev/null"
 
 - name: Schedule force terminate
-  command: "at now + {{ max_running_time }} -f /bin/terminate"
-  become: yes
+  ansible.posix.at:
+    command: terminate
+    count: "{{ max_running_time.split(' ')[0] }}"
+    units: "{{ max_running_time.split(' ')[1] }}"
+    unique: true
