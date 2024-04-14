@@ -5,15 +5,6 @@
     state: present
   become: yes
 
-- name: Create directory for daemon
-  file:
-    path: "/etc/{{ name }}"
-    state: directory
-    owner: root
-    group: root
-    mode: '0755'
-  become: yes
-
 - name: Create directory for daemon logs
   file:
     path: "/var/log/{{ name }}"
