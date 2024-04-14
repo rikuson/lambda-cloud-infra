@@ -11,12 +11,6 @@
     state: latest
   become: yes
 
-- name: Set environment
-  ini_file:
-    path: /etc/environment
-    option: LAMBDA_CLOUD_API_KEY
-    value: "{{ api_key }}"
-
 - name: Install shell script
   template:
     src: terminate.sh.j2
