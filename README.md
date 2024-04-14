@@ -36,7 +36,7 @@ Prerequisites:
 ---
 - hosts: localhost
   roles:
-    - rikuson.lambda_cloud_infra.gpu_instance:
+    - role: rikuson.lambda_cloud_infra.gpu_instance
       vars:
         api_key: XXXXXXXXX
         instance_type: gpu_1x_a10
@@ -46,13 +46,13 @@ Prerequisites:
         host_groups: gpu_instance
 - hosts: gpu_instance
   roles:
-    - rikuson.lambda_cloud_infra.terminator:
+    - role: rikuson.lambda_cloud_infra.terminator
       vars:
         api_key: XXXXXXXXX
         file_system_mount_point: /home/ubuntu/data
         output_file: /path/to/output/*[^__temp].mp4
         max_running_time: 24 hours
-    - rikuson.lambda_cloud_infra.daemon:
+    - role: rikuson.lambda_cloud_infra.daemon
       vars:
         name: daemon_name
         command: python run.py
