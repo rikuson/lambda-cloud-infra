@@ -55,5 +55,6 @@ Prerequisites:
     - rikuson.lambda_cloud_infra.daemon:
       vars:
         name: daemon_name
-        command: python /path/to/bin
+        command: python run.py
+        directory: /path/to/repo
 ```

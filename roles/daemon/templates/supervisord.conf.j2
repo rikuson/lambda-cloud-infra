@@ -1,5 +1,6 @@
 [program:{{ name }}]
 command={{ command }}
+directory={{ directory }}
 autostart=true
 autorestart=true
 stderr_logfile=/var/log/{{ name }}/error.log
