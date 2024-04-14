@@ -28,8 +28,9 @@ host_key_checking = False
 
 Prerequisites:
 
-- Generate API key
 - Add SSH key
+- Open port 22 on the firewall.
+- Generate API key
 - Create file system
 
 ```yaml
@@ -38,7 +39,7 @@ Prerequisites:
   roles:
     - role: rikuson.lambda_cloud_infra.gpu_instance
       vars:
-        api_key: XXXXXXXXX
+        api_key: <YOUR_API_KEY>
         instance_type: gpu_1x_a10
         region_name: us-west-1
         ssh_key_name: Macbook Air
@@ -48,10 +49,11 @@ Prerequisites:
   roles:
     - role: rikuson.lambda_cloud_infra.terminator
       vars:
-        api_key: XXXXXXXXX
+        api_key: <YOUR_API_KEY>
         file_system_mount_point: /home/ubuntu/data
         output_file: /path/to/output/*[^__temp].mp4
         max_running_time: 24 hours
+    - role: <ROLE_FOR_YOUR_MACHINE_LEARNING_TOOL>
     - role: rikuson.lambda_cloud_infra.daemon
       vars:
         name: daemon_name
