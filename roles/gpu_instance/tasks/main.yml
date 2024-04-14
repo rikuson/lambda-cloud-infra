@@ -25,7 +25,7 @@
       Authorization: "Bearer {{ api_key }}"
   register: instance_details
   until: instance_details.json.data.status == 'active'
-  retries: 10
+  retries: 20
   delay: 30
 
 - name: Add to host
