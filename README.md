@@ -50,6 +50,10 @@ Prerequisites:
       vars:
         api_key: XXXXXXXXX
         file_system_mount_point: /home/ubuntu/data
-        output_file: /home/ubuntu/path/to/output/*[^__temp].mp4
+        output_file: /path/to/output/*[^__temp].mp4
         max_running_time: 24 hours
+    - rikuson.lambda_cloud_infra.daemon:
+      vars:
+        name: daemon_name
+        command: python /path/to/bin
 ```

@@ -1,0 +1,7 @@
+[program:{{ name }}]
+command={{ command }}
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/{{ name }}/error.log
+stdout_logfile=/var/log/{{ name }}/output.log
+user=ubuntu

@@ -1,0 +1,37 @@
+---
+- name: Install Supervisor
+  apt:
+    name: supervisor
+    state: present
+  become: yes
+
+- name: Create directory for daemon
+  file:
+    path: "/etc/{{ name }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+
+- name: Create directory for daemon logs
+  file:
+    path: "/var/log/{{ name }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+
+- name: Copy Supervisor configuration file
+  template:
+    src: "{{ name }}.conf.j2"
+    dest: "/etc/supervisor/conf.d/{{ name }}.conf"
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Reload Supervisor
+  command: supervisorctl reload
+  become: yes
